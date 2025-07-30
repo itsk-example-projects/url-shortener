@@ -1,0 +1,11 @@
+postgres:
+  host: "localhost"
+  port: 5432
+  username: "itskoshkin"
+  password: "4221"
+  database: "url-shortener"
+  ssl_mode: "disable"
+base_url: "http://localhost:8080/" # change to your domain or IP address
+control_panel:
+  username: "admin"
+  password: "password"

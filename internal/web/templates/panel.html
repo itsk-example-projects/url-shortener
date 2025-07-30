@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Panel - URL Shortener</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    .links-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #333;
+      vertical-align: middle;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    th {
+      background-color: #1f1f1f;
+      text-align: left;
+    }
+    .col-short { width: 25%; }
+    .col-orig { width: 40%; }
+    .col-user { width: 20%; }
+    .col-actions { width: 15%; }
+
+    .short-link a {
+      color: #5393ff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .orig-link {
+      color: #ccc;
+      white-space: nowrap;
+    }
+    .actions {
+      text-align: right;
+    }
+    .actions button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #d32f2f;
+      color: #fff;
+      cursor: pointer;
+    }
+    .actions button:hover {
+      background-color: #e57373;
+    }
+    .back {
+      margin-top: 2rem;
+      display: block;
+      text-align: center;
+      color: #81c784;
+      text-decoration: none;
+    }
+    .back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Control Panel</h1>
+
+{{if .Links}}
+<div class="links-container">
+  <table>
+    <thead>
+    <tr>
+      <th class="col-short">Short URL</th>
+      <th class="col-orig">Original URL</th>
+      <th class="col-user">User ID</th>
+      <th class="col-actions actions">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{range .Links}}
+    <tr>
+      <td class="short-link">
+        <a href="/{{.Short}}" target="_blank">{{$.BaseURL}}{{.Short}}</a>
+      </td>
+      <td class="orig-link" title="{{.Long}}">{{.Long}}</td>
+      <td>{{.UserID}}</td>
+      <td class="actions">
+        <form method="POST" action="/admin/delete/{{.Short}}">
+          <button onclick="return confirm('Delete this link?')">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{end}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<p style="text-align:center;">No links found.</p>
+{{end}}
+
+<a class="back" href="/">🏠</a>
+
+</body>
+</html>
