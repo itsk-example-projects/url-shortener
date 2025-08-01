@@ -2,6 +2,8 @@
 
 A simple URL shortener service built with Go
 
+[url-shortener.itskoshkin.site](https://url-shortener.itskoshkin.site)
+
 ## Features
 
 *   URL Shortening – сonvert long URLs into short, easy-to-share links
